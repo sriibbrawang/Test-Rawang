@@ -205,15 +205,19 @@ const TRANS = [
   "اڠکاو توهن يڠ ميمبوهکن، تيدق اد يڠ ميمبوهکن ملاءينکن اڠکاو،",
   "دڠن سمبوه يڠ تيدق دأيکوتي ساکيتڽ."
 ];
-// timeline (seconds)
+// timeline (seconds) — synced to the sung recording
 const SEG = [
-  {s:4.0,  e:12.6, ws:5.0,  we:11.0},
-  {s:12.6, e:21.2, ws:13.4, we:19.6},
-  {s:21.2, e:28.8, ws:22.0, we:27.0},
+  {s:1.4,  e:9.5},
+  {s:9.5,  e:22.8},
+  {s:22.8, e:29.9},
 ];
-const FULL = {s:28.8, e:39.0, ws:30.0, we:37.6};
-const END = 39.0, TOTAL = 44.0;
-
+const FULL = {s:29.9, e:40.0};
+const END = 40.0, TOTAL = 45.0;
+const lineTimes = [
+  [[2.1,2.9],[2.9,3.8],[3.8,5.5],[5.5,6.6],[6.6,8.4],[8.4,9.3]],
+  [[9.3,9.9],[9.9,11.2],[[11.2,12.4],[14.2,15.3],[17.6,18.4]],[[12.4,13.4],[15.3,16.6],[18.4,19.7]],[[13.4,14.2],[16.6,17.6],[19.7,20.4]],[20.4,22.8]],
+  [[22.9,25.0],[25.0,26.5],[26.5,28.4],[28.4,29.9]],
+];
 function mkWords(el, text){
   el.innerHTML = text.split(' ').map(w=>`<span class="w">${w}</span>`).join(' ');
   return [...el.querySelectorAll('.w')];
@@ -224,15 +228,8 @@ fullEl.innerHTML = LINES.map(t=>t.split(' ').map(w=>`<span class="w">${w}</span>
 const fullWords = [...fullEl.querySelectorAll('.w')];
 TRANS.forEach((t,i)=>document.getElementById(`T${i+1}`).textContent=t);
 document.getElementById('TF').innerHTML = TRANS.join(' ');
-
-// word timing weights by length
-function wordTimes(words, ws, we){
-  const lens = words.map(w=>w.textContent.length+3);
-  const tot = lens.reduce((a,b)=>a+b,0);
-  let acc = ws; return lens.map(l=>{const a=acc; acc += (we-ws)*l/tot; return [a,acc];});
-}
-const lineTimes = lineWords.map((w,i)=>wordTimes(w, SEG[i].ws, SEG[i].we));
-const fullTimes = wordTimes(fullWords, FULL.ws, FULL.we);
+// full view: lines 1-2 already done, line 3 sung again
+const fullTimes = fullWords.map((w,i)=> i<12 ? [-1,-0.5] : [[30.0,31.9],[31.9,32.8],[32.8,34.7],[34.7,36.4]][i-12]);
 
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 const ease=x=>{x=clamp(x);return x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;};
@@ -243,10 +240,11 @@ const $=id=>document.getElementById(id);
 function setWords(words, times, t){
   let speaking=false;
   words.forEach((w,i)=>{
-    const [a,b]=times[i];
-    w.classList.toggle('on', t>=b);
-    w.classList.toggle('now', t>=a && t<b);
-    if(t>=a&&t<b) speaking=true;
+    const iv = Array.isArray(times[i][0]) ? times[i] : [times[i]];
+    const now = iv.some(([a,b])=>t>=a&&t<b);
+    w.classList.toggle('on', !now && t>=iv[0][1]);
+    w.classList.toggle('now', now);
+    if(now) speaking=true;
   });
   return speaking;
 }

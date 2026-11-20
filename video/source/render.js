@@ -9,7 +9,7 @@ const [,, html, out, mode, fpsArg] = process.argv;
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(800);
   if (mode === 'stills') {
-    for (const t of [1.5, 3, 7, 15, 24, 33, 42]) {
+    for (const t of [1.5, 5, 16, 25, 33, 43]) {
       await page.evaluate(t => render(t), t);
       await page.screenshot({ path: `${out}/still_${t}.png` });
     }
