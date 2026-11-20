@@ -1,0 +1,327 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--g:#1E6B3A;--gd:#174F2C;--cream:#FBF7EA;--bg:#E6F1E2;--gold:#C8962E;}
+  html,body{margin:0;padding:0;width:1080px;height:1920px;overflow:hidden;background:var(--bg);}
+  #stage{position:relative;width:1080px;height:1920px;overflow:hidden;
+    background:linear-gradient(180deg,#EAF4E6 0%,#E1EEDC 60%,#D7E8D1 100%);}
+  .topbar{position:absolute;left:0;top:0;width:100%;height:28px;background:var(--gd);}
+  #title{position:absolute;top:70px;width:100%;text-align:center;direction:rtl;
+    font-family:'Noto Naskh Arabic';font-weight:700;font-size:80px;color:var(--g);line-height:1.3;}
+  #subtitle{position:absolute;top:190px;width:100%;text-align:center;font-family:'Poppins';
+    font-weight:500;font-size:30px;color:#4C6B55;letter-spacing:1px;}
+  #scene{position:absolute;left:0;top:250px;width:1080px;height:840px;}
+  #card{position:absolute;left:50px;top:1110px;width:980px;min-height:330px;box-sizing:border-box;
+    background:var(--cream);border-radius:40px;box-shadow:0 10px 30px rgba(30,80,40,.15);
+    display:flex;align-items:center;justify-content:center;padding:30px 40px;}
+  .ar{direction:rtl;text-align:center;font-family:'Amiri';font-weight:700;color:#9DB7A3;line-height:1.75;}
+  .ar .w{transition:none;display:inline-block;}
+  .ar .w.on{color:var(--g);}
+  .ar .w.now{color:var(--gold);}
+  .layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px 40px;}
+  #trans{position:absolute;left:60px;top:1470px;width:960px;height:300px;}
+  .tr{position:absolute;inset:0;direction:rtl;text-align:center;font-family:'Noto Naskh Arabic';
+    font-weight:600;color:#2F3B33;line-height:1.75;}
+  #src{position:absolute;top:1790px;width:100%;text-align:center;direction:rtl;
+    font-family:'Noto Naskh Arabic';font-size:38px;color:#5B6B60;}
+  #tag{position:absolute;left:40px;top:290px;transform-origin:left center;display:flex;align-items:center;gap:14px;
+    background:var(--g);color:#fff;border-radius:60px;padding:10px 30px 10px 10px;
+    font-family:'Poppins';font-weight:600;font-size:34px;box-shadow:0 6px 18px rgba(0,0,0,.18);}
+  #tag img{width:76px;height:76px;border-radius:50%;border:4px solid #fff;object-fit:cover;}
+  #endcard{position:absolute;left:0;top:1080px;width:100%;height:800px;display:flex;flex-direction:column;
+    align-items:center;opacity:0;}
+  #endcard .amin{font-family:'Amiri';font-weight:700;font-size:120px;color:var(--g);direction:rtl;line-height:1.4;}
+  #endcard .amin2{font-family:'Amiri';font-size:58px;color:var(--gd);direction:rtl;margin-top:-10px;}
+  #endcard .who{margin-top:50px;display:flex;align-items:center;gap:26px;}
+  #endcard .who img{width:170px;height:170px;border-radius:50%;border:8px solid var(--cream);
+    box-shadow:0 8px 24px rgba(0,0,0,.2);object-fit:cover;}
+  #endcard .who .n1{font-family:'Poppins';font-weight:600;font-size:52px;color:var(--gd);}
+  #endcard .who .n2{font-family:'Noto Naskh Arabic';font-weight:700;font-size:46px;color:var(--g);direction:rtl;}
+</style></head>
+<body><div id="stage">
+<div class="topbar"></div>
+<div id="title">دعاء منزيارهي اورڠ ساکيت</div>
+<div id="subtitle">Doa Menziarahi Orang Sakit</div>
+
+<svg id="scene" viewBox="0 0 1080 840" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="hpat" width="56" height="56" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)">
+      <rect width="56" height="56" fill="#8D98AF"/>
+      <path d="M6 6 H46 V40 H18 V20 H34 V30" fill="none" stroke="#DCD2C2" stroke-width="5"/>
+      <path d="M0 52 H56" stroke="#DCD2C2" stroke-width="3"/>
+    </pattern>
+    <pattern id="dots" width="44" height="44" patternUnits="userSpaceOnUse">
+      <rect width="44" height="44" fill="#F2B3BC"/>
+      <rect x="8" y="8" width="9" height="9" rx="2" fill="#E25A6C" transform="rotate(20 12 12)"/>
+      <rect x="30" y="28" width="8" height="8" rx="2" fill="#fff" opacity=".8"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF4C8" stop-opacity=".95"/>
+      <stop offset="100%" stop-color="#FFF4C8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="win" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#CFE8F5"/><stop offset="1" stop-color="#F3FAF2"/>
+    </linearGradient>
+    <clipPath id="faceclip"><ellipse cx="760" cy="330" rx="84" ry="104"/></clipPath>
+  </defs>
+
+  <!-- room -->
+  <rect x="0" y="0" width="1080" height="840" fill="#EEF6EA"/>
+  <rect x="0" y="0" width="1080" height="250" fill="#8B5A3C" opacity=".9"/>
+  <g opacity=".35" stroke="#5E3A25" stroke-width="3">
+    <line x1="0" y1="60" x2="1080" y2="60"/><line x1="0" y1="125" x2="1080" y2="125"/><line x1="0" y1="190" x2="1080" y2="190"/>
+  </g>
+  <rect x="0" y="246" width="1080" height="10" fill="#6E4329"/>
+  <!-- window light -->
+  <g id="win">
+    <rect x="880" y="40" width="170" height="180" rx="10" fill="url(#win)" stroke="#F4EBDD" stroke-width="10"/>
+    <line x1="965" y1="40" x2="965" y2="220" stroke="#F4EBDD" stroke-width="8"/>
+  </g>
+  <rect x="0" y="740" width="1080" height="100" fill="#D3E4CD"/>
+
+  <!-- bed -->
+  <g id="bed">
+    <path d="M70 600 C 60 420, 300 360, 360 520" fill="none" stroke="#1F1F22" stroke-width="16" stroke-linecap="round"/>
+    <path d="M120 590 L 215 425 M 215 425 L 300 470 M 215 425 L 230 590 M 160 470 L 330 560" stroke="#2A2A2E" stroke-width="5" fill="none"/>
+    <rect x="40" y="580" width="600" height="190" rx="26" fill="#C9E6E4"/>
+    <rect x="40" y="580" width="600" height="40" rx="18" fill="#B4D8D6"/>
+    <ellipse cx="215" cy="590" rx="140" ry="52" fill="#EE7479"/>
+    <ellipse cx="215" cy="580" rx="120" ry="34" fill="#F48B8F"/>
+    <!-- patient -->
+    <g id="patient">
+      <ellipse cx="225" cy="572" rx="62" ry="58" fill="#2C94B8"/>
+      <ellipse cx="228" cy="580" rx="40" ry="44" fill="#D9A47E"/>
+      <path d="M208 584 q8 6 16 0 M236 584 q8 6 16 0" stroke="#4A2E22" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M222 604 q8 4 14 0" stroke="#9A5A4A" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M176 548 C 190 515, 268 515, 282 548 L 276 566 C 250 552, 205 552, 182 566 Z" fill="#F4B9C9"/>
+      <path d="M190 545 L 270 545 M 186 556 L 276 556" stroke="#fff" stroke-width="3" opacity=".8"/>
+    </g>
+    <g id="blanket">
+      <path d="M200 640 C 240 600, 420 590, 640 610 L 640 770 L 120 770 C 100 720, 150 660, 200 640 Z" fill="url(#dots)"/>
+      <path d="M200 640 C 240 600, 420 590, 640 610" stroke="#E8919E" stroke-width="10" fill="none"/>
+    </g>
+  </g>
+
+  <!-- particles from hands to patient -->
+  <g id="particles"></g>
+
+  <!-- Aunty Ain -->
+  <g id="ain">
+    <!-- body / blazer -->
+    <path d="M560 840 C 560 700, 610 615, 690 595 L 830 595 C 910 615, 960 700, 960 840 Z" fill="#1C1C21"/>
+    <path d="M705 600 L 815 600 L 795 840 L 725 840 Z" fill="#6E86C8"/>
+    <path d="M690 600 L 735 700 L 712 840 M 830 600 L 785 700 L 808 840" stroke="#0E0E12" stroke-width="5" fill="none"/>
+    <!-- hijab back + drape -->
+    <path d="M645 320 C 615 450, 590 540, 612 610 C 645 700, 690 780, 705 840 L 815 840 C 835 770, 880 690, 910 610 C 930 540, 905 450, 875 320 Z" fill="url(#hpat)"/>
+    <path d="M690 840 C 700 770, 690 700, 670 640" stroke="#6F7A92" stroke-width="5" fill="none" opacity=".6"/>
+    <g id="head">
+      <ellipse cx="760" cy="310" rx="134" ry="146" fill="url(#hpat)"/>
+      <path d="M640 330 C 650 420, 700 470, 760 478 C 820 470, 870 420, 880 330 L 880 430 C 860 500, 660 500, 640 430 Z" fill="url(#hpat)"/>
+      <!-- face -->
+      <ellipse cx="760" cy="330" rx="84" ry="104" fill="#D7A886"/>
+      <g clip-path="url(#faceclip)">
+        <ellipse cx="760" cy="262" rx="100" ry="34" fill="#E7D2B7"/>
+        <rect x="660" y="414" width="200" height="30" fill="#C99877" opacity=".35"/>
+      </g>
+      <!-- hijab framing face -->
+      <path d="M650 310 C 650 190, 870 190, 870 310 C 840 252, 680 252, 650 310 Z" fill="url(#hpat)"/>
+      <path d="M676 300 C 668 360, 690 420, 760 440 C 830 420, 852 360, 844 300 C 862 380, 840 470, 760 482 C 680 470, 658 380, 676 300 Z" fill="url(#hpat)"/>
+      <!-- blush -->
+      <circle cx="712" cy="372" r="16" fill="#E9867C" opacity=".22"/>
+      <circle cx="808" cy="372" r="16" fill="#E9867C" opacity=".22"/>
+      <!-- brows -->
+      <path id="browL" d="M705 284 Q 726 272 748 282" stroke="#3B2A20" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path id="browR" d="M772 282 Q 794 272 815 284" stroke="#3B2A20" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <!-- eyes -->
+      <g id="eyes">
+        <g class="eye"><ellipse cx="727" cy="318" rx="16" ry="9" fill="#fff"/><circle cx="727" cy="318" r="8" fill="#2A1C14"/><circle cx="730" cy="315" r="2.6" fill="#fff"/></g>
+        <g class="eye"><ellipse cx="793" cy="318" rx="16" ry="9" fill="#fff"/><circle cx="793" cy="318" r="8" fill="#2A1C14"/><circle cx="796" cy="315" r="2.6" fill="#fff"/></g>
+      </g>
+      <path d="M709 312 Q 727 302 745 312 M775 312 Q 793 302 811 312" stroke="#2A1C14" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <!-- glasses -->
+      <g fill="rgba(255,255,255,.10)" stroke="#B07D60" stroke-width="5">
+        <path d="M697 318 C 697 290, 757 288, 757 318 C 757 348, 697 352, 697 318 Z"/>
+        <path d="M763 318 C 763 288, 823 290, 823 318 C 823 352, 763 348, 763 318 Z"/>
+      </g>
+      <path d="M699 304 C 712 289, 745 288, 756 304 M764 304 C 775 288, 808 289, 821 304" stroke="#5B3A28" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M757 314 Q 760 308 763 314" stroke="#B07D60" stroke-width="4" fill="none"/>
+      <path d="M697 310 L 678 306 M823 310 L 842 306" stroke="#B07D60" stroke-width="4"/>
+      <!-- nose -->
+      <path d="M760 330 C 758 348, 752 356, 750 360 Q 760 366 770 360" stroke="#A9765A" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <!-- mouth -->
+      <path id="mouth" d="" fill="#8E3F3F" stroke="#7A3434" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+    <!-- arms + hands (doa) -->
+    <g id="hands">
+      <path d="M600 800 C 610 730, 650 690, 700 675 L 715 715 C 680 730, 660 770, 650 810 Z" fill="#1C1C21"/>
+      <path d="M920 800 C 910 730, 870 690, 820 675 L 805 715 C 840 730, 860 770, 870 810 Z" fill="#1C1C21"/>
+      <path d="M697 676 L 718 716 L 726 712 L 705 672 Z" fill="#6E86C8"/>
+      <path d="M823 676 L 802 716 L 794 712 L 815 672 Z" fill="#6E86C8"/>
+      <g id="handL">
+        <path d="M700 676 C 676 640, 668 590, 690 570 C 704 560, 722 572, 724 594 L 740 660 C 744 690, 720 700, 700 676 Z" fill="#D7A886"/>
+        <path d="M694 600 C 704 620, 712 640, 726 650 M 690 580 L 706 610" stroke="#B5846A" stroke-width="3" fill="none" opacity=".7"/>
+      </g>
+      <g id="handR" transform="translate(1520 0) scale(-1 1)">
+        <path d="M700 676 C 676 640, 668 590, 690 570 C 704 560, 722 572, 724 594 L 740 660 C 744 690, 720 700, 700 676 Z" fill="#D7A886"/>
+        <path d="M694 600 C 704 620, 712 640, 726 650 M 690 580 L 706 610" stroke="#B5846A" stroke-width="3" fill="none" opacity=".7"/>
+      </g>
+      <ellipse id="handglow" cx="760" cy="600" rx="120" ry="90" fill="url(#glow)" opacity="0"/>
+    </g>
+  </g>
+</svg>
+
+<div id="tag"><img src="face.jpg"><span>Aunty Ain</span></div>
+
+<div id="card">
+  <div class="layer" id="L1"><div class="ar" style="font-size:80px"></div></div>
+  <div class="layer" id="L2"><div class="ar" style="font-size:80px"></div></div>
+  <div class="layer" id="L3"><div class="ar" style="font-size:88px"></div></div>
+  <div class="layer" id="LF"><div class="ar" style="font-size:54px;line-height:1.7"></div></div>
+</div>
+<div id="trans">
+  <div class="tr" id="T1" style="font-size:48px"></div>
+  <div class="tr" id="T2" style="font-size:48px"></div>
+  <div class="tr" id="T3" style="font-size:48px"></div>
+  <div class="tr" id="TF" style="font-size:38px"></div>
+</div>
+<div id="src">(رواية البخاري دان مسلم)</div>
+
+<div id="endcard">
+  <div class="amin">آمِيْن</div>
+  <div class="amin2">يَا رَبَّ الْعَالَمِيْن</div>
+  <div class="who"><img src="face.jpg"><div><div class="n1">Aunty Ain</div><div class="n2">اونتي عين</div></div></div>
+</div>
+</div>
+
+<script>
+const LINES = [
+  "اَللّٰهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَأْسَ اِشْفِهِ",
+  "وَأَنْتَ الشَّافِي لَا شِفَاءَ إِلَّا شِفَاؤُكَ",
+  "شِفَاءً لَا يُغَادِرُ سَقَمًا"
+];
+const TRANS = [
+  "واهاي الله، توهن سکالين ماءنسي، هيلڠکنله ساکيتڽ، سمبوهکنله دي.",
+  "اڠکاو توهن يڠ ميمبوهکن، تيدق اد يڠ ميمبوهکن ملاءينکن اڠکاو،",
+  "دڠن سمبوه يڠ تيدق دأيکوتي ساکيتڽ."
+];
+// timeline (seconds)
+const SEG = [
+  {s:4.0,  e:12.6, ws:5.0,  we:11.0},
+  {s:12.6, e:21.2, ws:13.4, we:19.6},
+  {s:21.2, e:28.8, ws:22.0, we:27.0},
+];
+const FULL = {s:28.8, e:39.0, ws:30.0, we:37.6};
+const END = 39.0, TOTAL = 44.0;
+
+function mkWords(el, text){
+  el.innerHTML = text.split(' ').map(w=>`<span class="w">${w}</span>`).join(' ');
+  return [...el.querySelectorAll('.w')];
+}
+const lineWords = LINES.map((t,i)=>mkWords(document.querySelector(`#L${i+1} .ar`), t));
+const fullEl = document.querySelector('#LF .ar');
+fullEl.innerHTML = LINES.map(t=>t.split(' ').map(w=>`<span class="w">${w}</span>`).join(' ')).join('<br>');
+const fullWords = [...fullEl.querySelectorAll('.w')];
+TRANS.forEach((t,i)=>document.getElementById(`T${i+1}`).textContent=t);
+document.getElementById('TF').innerHTML = TRANS.join(' ');
+
+// word timing weights by length
+function wordTimes(words, ws, we){
+  const lens = words.map(w=>w.textContent.length+3);
+  const tot = lens.reduce((a,b)=>a+b,0);
+  let acc = ws; return lens.map(l=>{const a=acc; acc += (we-ws)*l/tot; return [a,acc];});
+}
+const lineTimes = lineWords.map((w,i)=>wordTimes(w, SEG[i].ws, SEG[i].we));
+const fullTimes = wordTimes(fullWords, FULL.ws, FULL.we);
+
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>{x=clamp(x);return x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;};
+const back=x=>{x=clamp(x);const c1=1.5,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);};
+function fade(t,s,e,d=0.6){return Math.min(ease((t-s)/d), ease((e-t)/d));}
+const $=id=>document.getElementById(id);
+
+function setWords(words, times, t){
+  let speaking=false;
+  words.forEach((w,i)=>{
+    const [a,b]=times[i];
+    w.classList.toggle('on', t>=b);
+    w.classList.toggle('now', t>=a && t<b);
+    if(t>=a&&t<b) speaking=true;
+  });
+  return speaking;
+}
+
+const particles = $('particles');
+const NP = 18;
+for(let i=0;i<NP;i++){const c=document.createElementNS('http://www.w3.org/2000/svg','circle');particles.appendChild(c);}
+
+window.render = function(t){
+  // title + subtitle
+  const ti = ease(t/1.0);
+  $('title').style.opacity = ti; $('title').style.transform = `translateY(${(1-ti)*-40}px)`;
+  const st = ease((t-0.6)/0.8); $('subtitle').style.opacity = st;
+  // scene
+  const sc = ease((t-0.3)/1.2);
+  $('scene').style.opacity = sc;
+  const ainIn = back((t-0.8)/1.2);
+  const breathe = Math.sin(t*2.2)*3;
+  const sway = Math.sin(t*0.9)*1.2;
+  $('ain').setAttribute('transform', `translate(0 ${(1-ainIn)*500 + breathe}) rotate(${sway} 760 840)`);
+  $('blanket').setAttribute('transform', `translate(0 ${Math.sin(t*1.6)*3})`);
+  const tg = back((t-2.0)/0.8);
+  $('tag').style.opacity = clamp((t-2.0)/0.3) * (1-clamp((t-END)/0.6));
+  $('tag').style.transform = `scale(${0.6+0.4*tg})`;
+
+  // blink
+  const bp = (t % 3.7); const bl = bp<0.16 ? Math.abs(Math.cos(bp/0.16*Math.PI)) : 1;
+  document.querySelectorAll('.eye').forEach((e,i)=>{
+    const cx = i? 793:727; e.setAttribute('transform',`translate(0 318) scale(1 ${Math.max(.08,bl)}) translate(0 -318)`);
+  });
+
+  // card visibility
+  const cardOn = fade(t, SEG[0].s-0.4, END, 0.6);
+  $('card').style.opacity = cardOn; $('card').style.transform = `translateY(${(1-cardOn)*60}px)`;
+  let speaking=false;
+  SEG.forEach((g,i)=>{
+    const o = fade(t,g.s,g.e,0.5);
+    $(`L${i+1}`).style.opacity=o; $(`L${i+1}`).style.transform=`scale(${0.94+0.06*o})`;
+    const to = fade(t,g.s+0.9,g.e,0.6);
+    $(`T${i+1}`).style.opacity=to; $(`T${i+1}`).style.transform=`translateY(${(1-to)*30}px)`;
+    if(t>g.s-1 && t<g.e+1) speaking = setWords(lineWords[i], lineTimes[i], t) || speaking;
+  });
+  const fo = fade(t,FULL.s,FULL.e,0.6);
+  $('LF').style.opacity=fo; $('TF').style.opacity=fade(t,FULL.s+0.6,FULL.e,0.6);
+  speaking = setWords(fullWords, fullTimes, t) || speaking;
+  $('src').style.opacity = fade(t, FULL.s+0.8, END+0.2, 0.6);
+
+  // mouth
+  let open = 0;
+  if(speaking){ open = clamp(0.35 + 0.35*Math.sin(t*17) + 0.3*Math.sin(t*7.3+1.3), 0, 1); }
+  const my=384, w=22;
+  if(open<0.08){
+    $('mouth').setAttribute('d',`M${760-w} ${my-2} Q760 ${my+12} ${760+w} ${my-2} Q760 ${my+5} ${760-w} ${my-2} Z`);
+  } else {
+    const h=4+open*16, ww=w-open*6;
+    $('mouth').setAttribute('d',`M${760-ww} ${my} Q760 ${my-4} ${760+ww} ${my} Q760 ${my+h*1.6} ${760-ww} ${my} Z`);
+  }
+  // hand glow & particles
+  const praying = clamp(Math.min((t-SEG[0].s)/1.0, (END-t)/0.8));
+  $('handglow').setAttribute('opacity', praying*(0.55+0.25*Math.sin(t*3)));
+  [...particles.children].forEach((c,i)=>{
+    const ph = (t*0.22 + i/NP) % 1;
+    const x0=760, y0=590, x1=235, y1=560;
+    const x = x0 + (x1-x0)*ph;
+    const y = y0 + (y1-y0)*ph - Math.sin(ph*Math.PI)*170 + Math.sin(ph*12+i)*10;
+    c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r', 4+ (i%3)*2.5);
+    c.setAttribute('fill', i%2? '#F6D77A':'#FFFFFF');
+    c.setAttribute('opacity', praying*Math.sin(ph*Math.PI)*0.9);
+  });
+
+  // end card
+  const ec = ease((t-END-0.3)/0.9);
+  $('endcard').style.opacity = ec; $('endcard').style.transform=`translateY(${(1-ec)*50}px)`;
+};
+window.TOTAL = TOTAL;
+render(0);
+</script>
+</body></html>
